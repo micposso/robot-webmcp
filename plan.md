@@ -24,3 +24,11 @@ Turn the existing Vite + React + TypeScript starter into a small, resilient deve
 
 - Robot variant (Lite or Wireless): not yet supplied; the central host-shell discovery flow supports either when its daemon is online.
 - Local authentication: user will provide `VITE_HF_TOKEN` and `VITE_HF_USERNAME`, or configure a local OAuth client ID.
+
+## Milestone 02 — robot WebMCP tools
+
+- Register one read-only status tool and five safe physical-control tools through `document.modelContext.registerTool()`.
+- Feature-detect native WebMCP and keep the dashboard functional when the API is unavailable.
+- Own registrations with an `AbortController` and clean them up on iframe teardown or hot reload.
+- Route UI and agent-triggered movement through one serialized controller to prevent overlapping physical commands.
+- Surface registration status and tool count in the dashboard.

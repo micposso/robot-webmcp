@@ -1,6 +1,6 @@
 # Reachy WebMCP
 
-A React developer dashboard proving that a browser app can connect to and safely control a physical Reachy Mini. WebMCP tool registration is intentionally deferred to the next milestone.
+A React developer dashboard proving that a browser app can connect to and safely control a physical Reachy Mini through both visible controls and WebMCP robot tools.
 
 ## Connection architecture
 
@@ -61,10 +61,26 @@ npm run lint
 
 The physical motion check requires a real Reachy Mini and cannot be completed by the automated build.
 
+## WebMCP robot tools
+
+When the browser exposes `document.modelContext`, the embedded dashboard registers:
+
+- `get_robot_status` — read-only connection status and robot name
+- `nod` — gentle nod, returning upright
+- `look_left` — turn the head 22° left
+- `look_right` — turn the head 22° right
+- `wiggle_antennas` — two safe antenna beats
+- `center` — return head, body, and antennas to neutral
+
+The dashboard includes a live WebMCP activity feed. Each agent tool call is shown while it executes and when it completes or fails. Manual button presses are intentionally excluded so the feed reflects browser-agent traffic only.
+
+Registrations are removed automatically when the document is unloaded. UI and agent-triggered commands share a movement lock, so physical commands cannot overlap.
+
+The API is feature-detected. In browsers without native WebMCP support, the robot dashboard remains fully functional and reports **Unsupported by this browser**.
+
 ## Current scope
 
 - Connection status and robot name
 - Nod, look left, look right, antenna wiggle, and center controls
-- WebMCP placeholder: **Not initialized**
-- No WebMCP tools, LLM, speech, backend, or event registration yet
-
+- Six robot WebMCP tools when supported by the browser
+- No website-content tools, LLM, speech, backend, or event registration yet
