@@ -95,6 +95,7 @@ button {
 
 button:hover { border-color: #b8ef4b; }
 button:focus-visible { outline: 2px solid #b8ef4b; outline-offset: 2px; }
+button:disabled { cursor: wait; opacity: 0.55; }
 
 .status-row {
   gap: 9px;
@@ -146,6 +147,79 @@ button:focus-visible { outline: 2px solid #b8ef4b; outline-offset: 2px; }
 .tool-name { margin: 4px 0 8px; color: #91a475; font: 0.7rem ui-monospace, SFMono-Regular, Consolas, monospace; }
 .tool-description { margin: 0; color: #abb0a6; font-size: 0.78rem; line-height: 1.45; }
 .read-only { color: #a5ccff; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+.tool-actions { display: flex; justify-content: flex-end; margin-top: 12px; }
+
+.execute-button {
+  padding: 6px 10px;
+  color: #0d0f0c;
+  border-color: #b8ef4b;
+  background: #b8ef4b;
+  font-weight: 750;
+}
+
+.execution-panel {
+  margin-bottom: 18px;
+  padding: 16px;
+  border: 1px solid #54623f;
+  border-radius: 14px;
+  background: #171c13;
+}
+
+.execution-panel[hidden],
+.confirmation[hidden],
+.execution-result[hidden] { display: none; }
+
+.execution-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.quiet-button { padding: 5px 9px; background: transparent; }
+
+details { margin: 12px 0; color: #b6bbb1; font-size: 0.76rem; }
+summary { cursor: pointer; }
+
+#input-schema,
+.execution-result {
+  overflow: auto;
+  max-height: 220px;
+  margin: 8px 0 0;
+  padding: 10px;
+  border-radius: 8px;
+  color: #cbd6ba;
+  background: #0d100b;
+  font: 0.68rem/1.5 ui-monospace, SFMono-Regular, Consolas, monospace;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.field-label { display: block; margin: 13px 0 7px; color: #d5d8d0; font-size: 0.76rem; font-weight: 700; }
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  border: 1px solid #394132;
+  border-radius: 9px;
+  padding: 10px;
+  color: #ecf0e7;
+  background: #0d100b;
+  font: 0.74rem/1.5 ui-monospace, SFMono-Regular, Consolas, monospace;
+}
+
+textarea:focus { outline: 2px solid #b8ef4b; outline-offset: 1px; }
+
+.confirmation {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 12px 0;
+  color: #ffd19a;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.confirmation input { margin-top: 2px; accent-color: #b8ef4b; }
+.primary-button { margin-top: 12px; color: #0d0f0c; border-color: #b8ef4b; background: #b8ef4b; font-weight: 750; }
+.execution-status { min-height: 18px; margin: 10px 0 0; color: #b6bbb1; font-size: 0.75rem; }
+.execution-status.error { color: #ff9c8f; }
+.execution-result { margin-top: 8px; color: #e3f5c5; }
 
 .empty-state {
   padding: 30px 18px;

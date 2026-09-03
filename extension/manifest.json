@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Reachy WebMCP Companion",
   "version": "0.1.0",
-  "description": "Shows the WebMCP tools exposed by the active browser tab.",
+  "description": "Discovers and manually executes WebMCP tools exposed by the active browser tab.",
   "minimum_chrome_version": "146",
   "permissions": [
     "sidePanel",

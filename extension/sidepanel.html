@@ -31,6 +31,35 @@
         <p id="status-text">Checking the active page…</p>
       </section>
 
+      <section id="execution-panel" class="execution-panel" aria-labelledby="execution-title" hidden>
+        <div class="execution-heading">
+          <div>
+            <p class="eyebrow">Manual execution</p>
+            <h2 id="execution-title">Selected tool</h2>
+          </div>
+          <button id="close-execution" class="quiet-button" type="button">Close</button>
+        </div>
+
+        <p id="execution-tool-name" class="tool-name"></p>
+
+        <details>
+          <summary>Input schema</summary>
+          <pre id="input-schema"></pre>
+        </details>
+
+        <label class="field-label" for="arguments-json">Arguments as JSON</label>
+        <textarea id="arguments-json" rows="7" spellcheck="false">{}</textarea>
+
+        <label id="action-confirmation" class="confirmation" hidden>
+          <input id="confirm-action" type="checkbox">
+          <span>I understand this tool may change data on the website.</span>
+        </label>
+
+        <button id="run-tool" class="primary-button" type="button">Run tool</button>
+        <p id="execution-status" class="execution-status" aria-live="polite"></p>
+        <pre id="execution-result" class="execution-result" hidden></pre>
+      </section>
+
       <section aria-labelledby="tools-heading">
         <div class="tools-heading">
           <h2 id="tools-heading">Available tools</h2>

@@ -1,6 +1,7 @@
 const UPDATE_MESSAGE = 'WEBMCP_DISCOVERY_UPDATE'
 const SCAN_MESSAGE = 'WEBMCP_DISCOVERY_SCAN'
 const STATE_MESSAGE = 'WEBMCP_DISCOVERY_STATE'
+const EXECUTE_MESSAGE = 'WEBMCP_EXECUTION_RUN'
 
 const stateByTab = new Map()
 
@@ -94,6 +95,34 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     void activeTab().then(async (tab) => {
       await scanTab(tab)
       sendResponse({ ok: true })
+    })
+    return true
+  }
+
+  if (message?.type === 'WEBMCP_EXECUTION_REQUEST' && !sender.tab) {
+    void activeTab().then(async (tab) => {
+      if (!tab?.id || tab.id !== message.tabId) {
+        sendResponse({
+          ok: false,
+          error: 'The active tab changed. Select the tool again on the current page.',
+        })
+        return
+      }
+
+      try {
+        const response = await chrome.tabs.sendMessage(tab.id, {
+          type: EXECUTE_MESSAGE,
+          toolId: message.toolId,
+          argumentsJson: message.argumentsJson,
+          confirmed: message.confirmed === true,
+        })
+        sendResponse(response)
+      } catch {
+        sendResponse({
+          ok: false,
+          error: 'Tool execution was interrupted. The page may have navigated or reloaded.',
+        })
+      }
     })
     return true
   }

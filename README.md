@@ -80,7 +80,9 @@ The API is feature-detected. In browsers without native WebMCP support, the robo
 
 ## Browser companion: WebMCP discovery
 
-The `extension/` directory contains a discovery-only Chrome side-panel extension. It follows the active HTTP or HTTPS tab, detects `document.modelContext`, reads the tools exposed through `getTools()`, and stays synchronized through the `toolchange` event. It does not execute tools, send page content to a model, record audio, or connect to Reachy.
+The `extension/` directory contains a Chrome side-panel extension. It follows the active HTTP or HTTPS tab, detects `document.modelContext`, reads the tools exposed through `getTools()`, and stays synchronized through the `toolchange` event. A user can select a tool, inspect its input schema, enter JSON arguments, and execute it manually in the active page. Tools not marked read-only require a separate confirmation checkbox before execution.
+
+The companion does not choose tools automatically, send page content to a model, record audio, or connect to Reachy. Tool results are rendered as text, never as executable HTML.
 
 To try it locally:
 
@@ -89,6 +91,7 @@ To try it locally:
 3. Choose **Load unpacked** and select this repository's `extension` directory.
 4. Pin **Reachy WebMCP Companion**, open an HTTP or HTTPS page, and click the extension icon to open its side panel.
 5. Navigate between a WebMCP-enabled page and a normal page. The panel updates the origin, status, and tool list for the active tab.
+6. Select **Try tool**, enter arguments matching the displayed JSON schema, and run it. Confirm the warning first when testing a tool that may change website data.
 
 The extension requests access to HTTP and HTTPS pages because discovery must run inside the active document. Tool metadata is kept in memory only and is not transmitted off-device.
 
