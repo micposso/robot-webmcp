@@ -99,7 +99,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true
   }
 
-  if (message?.type === 'WEBMCP_EXECUTION_REQUEST' && !sender.tab) {
+  if (
+    message?.type === 'WEBMCP_EXECUTION_REQUEST'
+    && sender.url === chrome.runtime.getURL('sidepanel.html')
+  ) {
     void activeTab().then(async (tab) => {
       if (!tab?.id || tab.id !== message.tabId) {
         sendResponse({

@@ -101,6 +101,21 @@ Run its unit checks with:
 npm run test:extension
 ```
 
+The extension suite includes Node unit tests and a browser-level test that loads a
+test-only copy of the unpacked extension in Playwright Chromium. Install that browser
+once on a development machine with:
+
+```powershell
+npx playwright install chromium
+```
+
+The browser test covers discovery, active-page synchronization, read-only execution,
+confirmation for action tools, dynamic `toolchange` registration, and unsupported
+pages. Its mock WebMCP context never connects to or moves a physical robot.
+
+For the real robot milestone, follow the repeatable
+[physical acceptance checklist](docs/milestone-03-acceptance.md).
+
 ## Current scope
 
 - Connection status and robot name
@@ -108,3 +123,8 @@ npm run test:extension
 - Six robot WebMCP tools when supported by the browser
 - Active-tab WebMCP discovery through the optional Chrome side-panel extension
 - No website-content tools, LLM, speech, backend, or event registration yet
+
+## Automated verification
+
+GitHub Actions runs lint, the production build, Node extension tests, and the
+Playwright Chromium extension test for every push and pull request.
