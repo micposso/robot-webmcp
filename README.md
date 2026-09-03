@@ -78,9 +78,30 @@ Registrations are removed automatically when the document is unloaded. UI and ag
 
 The API is feature-detected. In browsers without native WebMCP support, the robot dashboard remains fully functional and reports **Unsupported by this browser**.
 
+## Browser companion: WebMCP discovery
+
+The `extension/` directory contains a discovery-only Chrome side-panel extension. It follows the active HTTP or HTTPS tab, detects `document.modelContext`, reads the tools exposed through `getTools()`, and stays synchronized through the `toolchange` event. It does not execute tools, send page content to a model, record audio, or connect to Reachy.
+
+To try it locally:
+
+1. Open `chrome://extensions` in a Chrome build with WebMCP enabled.
+2. Turn on **Developer mode**.
+3. Choose **Load unpacked** and select this repository's `extension` directory.
+4. Pin **Reachy WebMCP Companion**, open an HTTP or HTTPS page, and click the extension icon to open its side panel.
+5. Navigate between a WebMCP-enabled page and a normal page. The panel updates the origin, status, and tool list for the active tab.
+
+The extension requests access to HTTP and HTTPS pages because discovery must run inside the active document. Tool metadata is kept in memory only and is not transmitted off-device.
+
+Run its unit checks with:
+
+```powershell
+npm run test:extension
+```
+
 ## Current scope
 
 - Connection status and robot name
 - Nod, look left, look right, antenna wiggle, and center controls
 - Six robot WebMCP tools when supported by the browser
+- Active-tab WebMCP discovery through the optional Chrome side-panel extension
 - No website-content tools, LLM, speech, backend, or event registration yet

@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Reachy WebMCP Companion",
+  "version": "0.1.0",
+  "description": "Shows the WebMCP tools exposed by the active browser tab.",
+  "minimum_chrome_version": "146",
+  "permissions": [
+    "sidePanel",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Open Reachy WebMCP Companion"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "tool-data.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

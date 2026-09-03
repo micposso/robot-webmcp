@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark">
+    <title>Reachy WebMCP Companion</title>
+    <link rel="stylesheet" href="sidepanel.css">
+  </head>
+  <body>
+    <main>
+      <header class="masthead">
+        <div class="reachy-mark" aria-hidden="true"><span></span><span></span></div>
+        <div>
+          <p class="eyebrow">Reachy companion</p>
+          <h1>WebMCP discovery</h1>
+        </div>
+      </header>
+
+      <section class="site-card" aria-labelledby="site-title">
+        <div>
+          <p class="eyebrow">Active website</p>
+          <h2 id="site-title">Waiting for a tab</h2>
+          <p id="site-origin" class="site-origin">Open an HTTP or HTTPS page.</p>
+        </div>
+        <button id="refresh" type="button" aria-label="Refresh WebMCP tools">Refresh</button>
+      </section>
+
+      <section class="status-row" aria-live="polite">
+        <span id="status-dot" class="status-dot"></span>
+        <p id="status-text">Checking the active page…</p>
+      </section>
+
+      <section aria-labelledby="tools-heading">
+        <div class="tools-heading">
+          <h2 id="tools-heading">Available tools</h2>
+          <span id="tool-count">0</span>
+        </div>
+        <div id="tool-list" class="tool-list"></div>
+        <p id="empty-state" class="empty-state">No tools discovered yet.</p>
+      </section>
+    </main>
+
+    <script src="sidepanel.js"></script>
+  </body>
+</html>
