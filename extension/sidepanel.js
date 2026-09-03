@@ -178,7 +178,10 @@ elements.runTool.addEventListener('click', () => {
     argumentsJson: elements.argumentsJson.value,
     confirmed: selectedTool.readOnly || elements.confirmAction.checked,
   }).then((response) => {
-    if (!response?.ok) throw new Error(response?.error || 'The tool did not return a result.')
+    if (!response) {
+      throw new Error('The companion service worker did not answer. Reload the extension, reopen this panel, and try again.')
+    }
+    if (!response.ok) throw new Error(response.error || 'The tool did not return a result.')
 
     elements.executionStatus.textContent = 'Tool completed successfully.'
     elements.executionResult.textContent = formatResult(response.result)

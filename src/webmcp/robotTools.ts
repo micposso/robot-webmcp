@@ -38,10 +38,10 @@ function movementTool(
       properties: {},
       additionalProperties: false,
     },
-    async execute(_input, { signal }) {
+    async execute(_input, options) {
       const activityId = beginWebMCPActivity(name, title)
       try {
-        await runRobotMovement(action, signal)
+        await runRobotMovement(action, options?.signal)
         finishWebMCPActivity(activityId, 'success')
         return {
           success: true,

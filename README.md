@@ -39,6 +39,76 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173).
 
+## Start Reachy Mini from a terminal
+
+This project pins `@pollen-robotics/reachy-mini-sdk` to `1.8.0`. For a
+**Reachy Mini Lite**, run the globally installed Python daemon on the computer
+connected to the robot by USB. Keep the daemon terminal open while using the web
+app. The robot also needs its external power supply; USB alone does not power the
+motors. The global daemon should use the matching `1.8.0` release.
+
+### macOS Terminal — Reachy Mini Lite
+
+The daemon is installed globally, so it can run from any directory:
+
+```bash
+reachy-mini-daemon
+```
+
+If the executable is installed but is not on `PATH`, use its Python module:
+
+```bash
+python3 -m reachy_mini.daemon.app.main
+```
+
+In a second Terminal window, start this dashboard:
+
+```bash
+npm install
+npm run dev
+```
+
+### Windows PowerShell — Reachy Mini Lite
+
+The daemon is installed globally, so it can run from any directory. PowerShell
+can first show which executable it will use, then start it:
+
+```powershell
+Get-Command reachy-mini-daemon
+reachy-mini-daemon
+```
+
+If PowerShell reports that the command is not recognized, bypass the missing
+`PATH` entry and start the globally installed package through Python:
+
+```powershell
+py -3.12 -m reachy_mini.daemon.app.main
+```
+
+In a second PowerShell window, start this dashboard from the repository root:
+
+```powershell
+npm install
+npm run dev
+```
+
+For either operating system, verify the Lite daemon at
+[http://localhost:8000/docs](http://localhost:8000/docs). Then open the dashboard
+at [http://localhost:5173](http://localhost:5173).
+
+### Reachy Mini Wireless
+
+Do not start a second daemon on the Mac or Windows computer. Power on the Wireless
+robot and connect the computer to the same network; its daemon starts on the
+robot. Verify it at
+[http://reachy-mini.local:8000/docs](http://reachy-mini.local:8000/docs), then run
+`npm run dev` in this repository and open
+[http://localhost:5173](http://localhost:5173).
+
+If the daemon command is not found or the robot is not detected, review the
+official [Reachy Mini quickstart](https://github.com/pollen-robotics/reachy_mini/blob/main/docs/source/SDK/quickstart.md)
+and [troubleshooting guide](https://github.com/pollen-robotics/reachy_mini/blob/main/docs/source/troubleshooting.md).
+
 ## Physical robot test
 
 1. Turn on Reachy Mini and make sure its robot daemon is online and registered to the same Hugging Face account.

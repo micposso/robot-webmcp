@@ -44,6 +44,12 @@ async function broadcast(state) {
   })
 }
 
+function isCompanionUiSender(sender) {
+  if (sender.id !== chrome.runtime.id) return false
+
+  return !sender.tab || sender.url === chrome.runtime.getURL('sidepanel.html')
+}
+
 async function scanTab(tab) {
   if (!tab?.id) return
 
@@ -101,7 +107,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
   if (
     message?.type === 'WEBMCP_EXECUTION_REQUEST'
-    && sender.url === chrome.runtime.getURL('sidepanel.html')
+    && isCompanionUiSender(sender)
   ) {
     void activeTab().then(async (tab) => {
       if (!tab?.id || tab.id !== message.tabId) {

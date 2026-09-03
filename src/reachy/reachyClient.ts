@@ -71,7 +71,9 @@ class ReachyClient {
       const handle = await connectToHost()
       this.handle = handle
       const selectedId = handle.reachy.preselectedRobotId
-      const robotName = handle.reachy.robots.find((robot) => robot.id === selectedId)?.meta?.name ?? null
+      const robotName = handle.reachy.robots.find((robot) => robot.id === selectedId)?.meta?.name
+        ?? handle.hostName
+        ?? null
 
       handle.reachy.addEventListener('disconnected', () => {
         this.handle = null
@@ -118,4 +120,3 @@ class ReachyClient {
 }
 
 export const reachyClient = new ReachyClient()
-
